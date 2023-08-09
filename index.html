@@ -6,18 +6,18 @@
     </head>
     <body>
         <div id="app">
-            <!-- <label for="sort">並び替え</label>
-        <select id="sort">
-            <option value="1">ID名</option>
-            <option value="2">昇順</option>
-            <option value="3">降順</option>
-        </select> -->
-            <!-- <label for="search">検索</label>
-        <select id="search">
-            <option value="1">ID名</option>
-            <option value="2">昇順</option>
-            <option value="3">降順</option>
-        </select> -->
+            <!-- キーワード検索 -->
+            <!-- <select v-model="searchSelect">
+                <option value="1">ID名</option>
+                <option value="2">名前</option>
+                <option value="3">会社名</option>
+                <option value="4">部署</option>
+                <option value="5">役職</option>
+            </select>
+            <input type="text" v-model.number="searchWord">
+            <button v-on:click="searchClick">検索</button> -->
+
+            <!-- ユーザーリスト（並べ替え機能） -->
             <table border="1">
                 <tr>
                     <th v-on:click="sortId">ID名</th>

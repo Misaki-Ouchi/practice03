@@ -1,128 +1,117 @@
 Vue.createApp({
   data: function () {
     return {
-      count1: 0,
-      count2: 0,
-      count3: 0,
-      count4: 0,
-      count5: 0,
-      list: [],
-      orderedList: []
+      list: [], //ユーザーリスト
+      newList: [], //操作後リスト
+
+      // searchSelect: "1", // キーワード検索
+      // searchWord: "", //検索ワード
+      // searchResult: true, //検索結果 表示or非表示
+
+      orderedList: [], // 並べ替え後リスト
+      count1: false, //並べ替え用 count1は初期でtrueのため
+      count2: true,
+      count3: true,
+      count4: true,
+      count5: true,
     };
   },
   created: async function () {
+    // ユーザーリスト
     const res = await fetch("./data/cards.json");
     const users = await res.json();
     this.list = users;
     this.orderedList = this.list;
   },
   methods: {
+    // // キーワード検索
+    // searchClick: function () {
+    //   let searchedList = [];
+    //   // ID検索
+    //   if (this.searchSelect === "1") {
+    //     let found = this.list.find(e => e.id === this.searchWord);
+    //     searchedList.push(found);
+    //   }
+    //   this.newList = searchedList;
+    //   // forEachで検索ヒットのuserだけsearchedListに入れる。最後にsearchedListをnewListに入れる。orderedListもnewListに変更
+    // },
+
+    // ユーザーリスト並べ替え機能
     sortId: function () {
       // ID名クリック
-      this.count1++;
-      console.log(this.count1);
-      let list1 = this.list.slice();
-      if (this.count1 % 2 !== 0) {
-        list1.sort((a, b) => {
-          return a.id - b.id;
-        });
-      } else {
-        list1.sort((a, b) => {
-          return b.id - a.id;
-        });
-      }
-      this.orderedList = list1;
-      // 他のカウントを初期化
-      this.count2 = 0;
-      this.count3 = 0;
-      this.count4 = 0;
-      this.count5 = 0;
+      this.sortNum(this.count1, "id", this.list);
+      // 2回目を逆に＆別タブを初期化
+      this.count1 = !this.count1;
+      this.count2 = true;
+      this.count3 = true;
+      this.count4 = true;
+      this.count5 = true;
     },
     sortName: function () {
+        this.sortStr(this.count2, "name" , this.list);
       // 名前クリック
-      this.count2++;
-      let list2 = this.list.slice();
-      if (this.count2 % 2 !== 0) {
-        list2.sort((a, b) => {
-          return a.name.localeCompare(b.name, "ja");
-        });
-      } else if (this.count2 % 2 === 0 && this.count2 !== 0) {
-        list2.sort((a, b) => {
-          return b.name.localeCompare(a.name, "ja");
-        });
-      }
-      this.orderedList = list2;
-      this.count1 = 0;
-      this.count3 = 0;
-      this.count4 = 0;
-      this.count5 = 0;
+      this.count1 = true;
+      this.count2 = !this.count2;
+      this.count3 = true;
+      this.count4 = true;
+      this.count5 = true;
     },
     sortCom: function () {
       // 会社名クリック
-      this.count3++;
-      let list3 = this.list.slice();
-      if (this.count3 % 2 !== 0) {
-        list3.sort((a, b) => {
-          return a.company.localeCompare(b.company, "ja");
-        });
-      } else if (this.count3 % 2 === 0 && this.count3 !== 0) {
-        list3.sort((a, b) => {
-          return b.company.localeCompare(a.company, "ja");
-        });
-      }
-      this.orderedList = list3;
-      this.count1 = 0;
-      this.count2 = 0;
-      this.count4 = 0;
-      this.count5 = 0;
+      this.sortStr(this.count3, "company" , this.list);
+      this.count1 = true;
+      this.count2 = true;
+      this.count3 = !this.count3;
+      this.count4 = true;
+      this.count5 = true;
     },
     sortDiv: function () {
       // 部署クリック
-      this.count4++;
-      let list4 = this.list.slice();
-      if (this.count4 % 2 !== 0) {
-        list4.sort((a, b) => {
-          return a.division.localeCompare(b.division, "ja");
-        });
-      } else if (this.count4 % 2 === 0 && this.count4 !== 0) {
-        list4.sort((a, b) => {
-          return b.division.localeCompare(a.division, "ja");
-        });
-      }
-      this.orderedList = list4;
-      this.count1 = 0;
-      this.count2 = 0;
-      this.count3 = 0;
-      this.count5 = 0;
+      this.sortStr(this.count4, "division" , this.list);
+      this.count1 = true;
+      this.count2 = true;
+      this.count3 = true;
+      this.count4 = !this.count4;
+      this.count5 = true;
     },
     sortTitle: function () {
       // 役職クリック
-      this.count5++;
-      let list5 = this.list.slice();
-      if (this.count5 % 2 !== 0) {
-        list5.sort((a, b) => {
-          return a.title.localeCompare(b.title, "ja");
-        });
-      } else if (this.count5 % 2 === 0 && this.count5 !== 0) {
-        list5.sort((a, b) => {
-          return b.title.localeCompare(a.title, "ja");
-        });
-      }
-      this.orderedList = list5;
-      this.count1 = 0;
-      this.count2 = 0;
-      this.count3 = 0;
-      this.count4 = 0;
+      this.sortStr(this.count5, "title", this.list);
+      this.count1 = true;
+      this.count2 = true;
+      this.count3 = true;
+      this.count4 = true;
+      this.count5 = !this.count5;
     },
+    sortNum: function (count, key, list) {
+      let damList = list.slice();
+      if (count === true) {
+        damList.sort((a, b) => {
+          return a[key] - b[key];
+        });
+        count = false;
+      } else {
+        damList.sort((a, b) => {
+          return b[key] - a[key];
+        });
+        count = true;
+      }
+      this.orderedList = damList;
+    },
+    sortStr: function (count, key, list) {
+      let damList = list.slice();
+      if (count === true) {
+        damList.sort((a, b) => {
+          return a[key].localeCompare(b[key], "ja")
+        });
+        count = false;
+      } else {
+        damList.sort((a, b) => {
+          return b[key].localeCompare(a[key], "ja")
+        });
+        count = true;
+      }
+      this.orderedList = damList;
+    }
   },
-  // sortList: function (key) {
-  //   this.list.sort((a, b) => {
-  //     return a.key.localeCompare(b.key, "ja");
-  //   });
-  // },
-  // sortDown: function (key) {
-  //   this.list.sort((a, b) => {
-  //     return b.key.localeCompare(a.key, "ja");
-  //   });
-  // },
 }).mount("#app");
