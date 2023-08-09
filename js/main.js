@@ -22,7 +22,7 @@ Vue.createApp({
       this.count1++;
       console.log(this.count1);
       let list1 = this.list.slice();
-      if (this.count1 % 2 === 0) {
+      if (this.count1 % 2 !== 0) {
         list1.sort((a, b) => {
           return a.id - b.id;
         });
@@ -32,6 +32,11 @@ Vue.createApp({
         });
       }
       this.orderedList = list1;
+      // 他のカウントを初期化
+      this.count2 = 0;
+      this.count3 = 0;
+      this.count4 = 0;
+      this.count5 = 0;
     },
     sortName: function () {
       // 名前クリック
@@ -47,6 +52,10 @@ Vue.createApp({
         });
       }
       this.orderedList = list2;
+      this.count1 = 0;
+      this.count3 = 0;
+      this.count4 = 0;
+      this.count5 = 0;
     },
     sortCom: function () {
       // 会社名クリック
@@ -62,6 +71,10 @@ Vue.createApp({
         });
       }
       this.orderedList = list3;
+      this.count1 = 0;
+      this.count2 = 0;
+      this.count4 = 0;
+      this.count5 = 0;
     },
     sortDiv: function () {
       // 部署クリック
@@ -77,6 +90,10 @@ Vue.createApp({
         });
       }
       this.orderedList = list4;
+      this.count1 = 0;
+      this.count2 = 0;
+      this.count3 = 0;
+      this.count5 = 0;
     },
     sortTitle: function () {
       // 役職クリック
@@ -92,6 +109,10 @@ Vue.createApp({
         });
       }
       this.orderedList = list5;
+      this.count1 = 0;
+      this.count2 = 0;
+      this.count3 = 0;
+      this.count4 = 0;
     },
   },
   // sortList: function (key) {
