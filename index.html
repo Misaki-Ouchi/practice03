@@ -1,35 +1,41 @@
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>システム構築課題</title>
-    <link rel="stylesheet" href="css/main.css">
-</head>
-<body>
-    <div id="app">
-        <label for="sort">並び替え</label>
-        <select id="sort" v-model.number="sortOrder">
-            <option value="1">ID名</option>
-            <option value="2">昇順</option>
-            <option value="3">降順</option>
-        </select>
-        <table border="1">
-            <tr>
-                <th>ID名</th>
-                <th>名前</th>
-                <th>会社名</th>
-                <th>部署</th>
-                <th>役職</th>
-            </tr>
-            <tr v-for="item in orderedList" v-bind:key="item.id">
-                <td>{{item.id}}</td>
-                <td>{{item.name}}</td>
-                <td>{{item.company}}</td>
-                <td>{{item.division}}</td>
-                <td>{{item.title}}</td>
-            </tr>
-        </table>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.29/dist/vue.global.js"></script>
-    <script src="js/main.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>システム構築課題</title>
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <div id="app">
+            <!-- キーワード検索 -->
+            <!-- <select v-model="searchSelect">
+                <option value="1">ID名</option>
+                <option value="2">名前</option>
+                <option value="3">会社名</option>
+                <option value="4">部署</option>
+                <option value="5">役職</option>
+            </select>
+            <input type="text" v-model.number="searchWord">
+            <button v-on:click="searchClick">検索</button> -->
+
+            <!-- ユーザーリスト（並べ替え機能） -->
+            <table border="1">
+                <tr>
+                    <th v-on:click="sortId">ID名</th>
+                    <th v-on:click="sortName">名前</th>
+                    <th v-on:click="sortCom">会社名</th>
+                    <th v-on:click="sortDiv">部署</th>
+                    <th v-on:click="sortTitle">役職</th>
+                </tr>
+                <tr v-for="item in orderedList" v-bind:key="item.id">
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.company }}</td>
+                    <td>{{ item.division }}</td>
+                    <td>{{ item.title }}</td>
+                </tr>
+            </table>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue@3.2.29/dist/vue.global.js"></script>
+        <script src="js/main.js"></script>
+    </body>
 </html>
