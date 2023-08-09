@@ -30,6 +30,7 @@ Vue.createApp({
       if (this.searchSelect === "searchId") {
         searchedList.push(this.list.find((e) => e.id === this.searchWord));
       }
+      this.newList = searchedList;
       // 名前検索
       this.searchStr("searchName", "name", this.list);
       // 会社名検索
