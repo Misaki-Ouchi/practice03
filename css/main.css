@@ -1,8 +1,41 @@
 @charset "utf-8";
 
+body {
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+#search button {
+  margin-left: 1rem;
+}
+#add {
+  margin-bottom: 1rem;
+}
+.errText {
+  color: red;
+}
+label {
+  display: inline-block;
+  width: 3rem;
+  margin-right: 1rem;
+}
+input {
+  width: 12.5rem;
+}
+.add1 {
+  display: flex;
+  margin-top: -1.5rem;
+}
+#add1-1, #add1-2 {
+  width: 5rem;
+}
+.add1-1{
+  margin-left: 4rem;
+}
+.add1-2{
+  margin-left: 0.5rem;
+}
 table {
   border-collapse: collapse;
-  margin-top: 1rem;
 }
 th {
   background: #8df;

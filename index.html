@@ -7,15 +7,37 @@
     <body>
         <div id="app">
             <!-- キーワード検索 -->
-            <select v-model="searchSelect">
-                <option value="searchId">ID名</option>
-                <option value="searchName">名前</option>
-                <option value="searchCom">会社名</option>
-                <option value="searchDiv">部署</option>
-                <option value="searchTitle">役職</option>
-            </select>
-            <input type="text" v-model.number="searchWord">
-            <button v-on:click="searchClick">検索</button>
+            <div id="search">
+                <select v-model="searchSelect">
+                    <option value="searchId">ID名</option>
+                    <option value="searchName">名前</option>
+                    <option value="searchCom">会社名</option>
+                    <option value="searchDiv">部署</option>
+                    <option value="searchTitle">役職</option>
+                </select>
+                <input type="text" v-model.number="searchWord">
+                <button v-on:click="searchClick">検索</button>
+            </div>
+<br>
+            <!-- ユーザー新規追加フォーム -->
+            <div id="add">
+                <label for="add1-1 add1-2">名前</label>
+                <div class="add1">
+                    <span class="add1-1">氏</span><input id="add1-1" type="text" v-model="addFirstName"><br>
+                    <span class="add1-2">名</span><input id="add1-2" type="text" v-model="addLastName"><br>
+                </div>
+                <p class="errText">{{errName}}</p>
+                <label for="add2">会社名</label>
+                <input id="add2" type="text" v-model="addCom"><br>
+                <p class="errText">{{errCom}}</p>
+                <label for="add3">部署</label>
+                <input id="add3" type="text" v-model="addDiv"><br>
+                <p class="errText">{{errDiv}}</p>
+                <label for="add4">役職</label>
+                <input id="add4" type="text" v-model="addTitle"><br>
+                <p class="errText">{{errTitle}}</p>
+                <button v-on:click="addClick">追加</button>
+            </div>
 
             <!-- ユーザーリスト（並べ替え機能） -->
             <table border="1">

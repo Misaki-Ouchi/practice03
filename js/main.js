@@ -8,6 +8,16 @@ Vue.createApp({
       searchWord: "", //検索ワード
       searchResult: true, //検索結果 表示or非表示
 
+      addFirstName: "", //ユーザー追加
+      addLastName: "",
+      addCom: "",
+      addDiv: "",
+      addTitle: "",
+      errName: "", //入力エラーテキスト
+      errCom: "",
+      errDiv: "",
+      errTitle: "",
+
       count1: false, //並べ替え用 count1は初期でtrueのため
       count2: true,
       count3: true,
@@ -23,6 +33,74 @@ Vue.createApp({
     this.newList = this.list;
   },
   methods: {
+    // ユーザー追加
+    addClick: function () {
+      // エラーチェック
+      // 名前入力チェック
+      if (this.addFirstName === "" || this.addLastName === "") {
+        this.errName = "名前を入力してください";
+      } else if (
+        !this.addFirstName.match(/^[ぁ-んア-ヶｱ-ﾝﾞﾟ一-龠]*$/) ||
+        !this.addLastName.match(/^[ぁ-んア-ヶｱ-ﾝﾞﾟ一-龠]*$/)
+      ) {
+        this.errName = "日本語で入力してください";
+      } else {
+        this.errName = "";
+      }
+      // 会社名入力チェック
+      if (this.addCom === "") {
+        this.errCom = "会社名を入力してください";
+      } else if (this.addCom.indexOf("株式会社") === -1) {
+        this.errCom = "「株式会社」を付けて入力してください";
+      } else if (this.addCom.length <= 4) {
+        this.errCom = "正しい会社名を入力してください";
+      } else {
+        this.errCom = "";
+      }
+      // 部署入力チェック
+      if (this.addDiv === "") {
+        this.errDiv = "部署名を入力してください";
+      } else if (
+        !this.addDiv.match(
+          /営業部|総務部|開発部|企画部|広報部|人事部|経理部|経営企画部|製造部/
+        )
+      ) {
+        this.errDiv = "正しい部署名を入力してください";
+      }
+      // 役職入力チェック
+      if (this.addTitle === "") {
+        this.errTitle = "";
+      } else if (!this.addTitle.match(/課長|主任|部長|係長/)) {
+        this.errTitle = "正しい役職名を入力してください";
+      }
+      // 新規ユーザー追加
+      if (
+        this.addFirstName !== "" &&
+        this.errName === "" &&
+        this.errCom === "" &&
+        this.errDiv === "" &&
+        this.errTitle === ""
+      ) {
+        let addName = this.addFirstName + " " + this.addLastName; //氏名の間に半角空白
+        let com = this.addCom.replace(/\s+/g, ""); // 会社名の空白削除
+        let newUser = {
+          id: this.list.length + 1,
+          name: addName,
+          company: com,
+          division: this.addDiv,
+          title: this.addTitle,
+        };
+        this.list.push(newUser);
+        alert("社員リストに追加されました");
+        // 入力欄を初期化
+        this.addFirstName = "";
+        this.addLastName = "";
+        this.addCom = "";
+        this.addDiv = "";
+        this.addTitle = "";
+      }
+    },
+
     // キーワード検索
     searchClick: function () {
       let searchedList = [];
